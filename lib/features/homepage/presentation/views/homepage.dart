@@ -5,6 +5,8 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(backgroundColor: const Color.fromARGB(255, 235, 231, 231)),
+    );
   }
 }
