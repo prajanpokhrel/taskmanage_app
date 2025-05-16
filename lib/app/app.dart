@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -7,12 +8,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TaskFlow ',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const Homepage(),
+    return ResponsiveSizer(
+      builder: (context, Orientation, ScreenType) {
+        return MaterialApp(
+          title: 'TaskFlow ',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          ),
+          home: const LoginScreen(),
+        );
+      },
     );
   }
 }
