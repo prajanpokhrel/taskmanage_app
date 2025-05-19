@@ -3,7 +3,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 
 class CommonButton extends StatelessWidget {
-  const CommonButton({super.key});
+  final String buttonName;
+  const CommonButton({super.key, required this.buttonName});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CommonButton extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Center(
           child: Text(
-            "Sign in",
+            buttonName,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,

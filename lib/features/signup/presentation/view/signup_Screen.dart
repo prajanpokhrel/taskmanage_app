@@ -6,16 +6,16 @@ import 'package:taskmanagement_app/common/login_logo.dart';
 import 'package:taskmanagement_app/common/pasword_form_field.dart';
 import 'package:taskmanagement_app/common/text_form.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
-import 'package:taskmanagement_app/features/signup/presentation/view/signup_Screen.dart';
+import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     //for status bar
@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20.h),
             Center(
               child: Text(
-                "Login here",
+                "Create An Account",
                 style: TextStyle(
                   color: AppconstColor.PrimaryColor,
                   fontSize: 18,
@@ -39,12 +39,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 2.h),
             Text(
-              "Welcome back you have",
+              "Create an account so you can ",
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             Text(
-              "been missed !",
+              "manage your tasks.",
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
@@ -68,23 +68,23 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () {
                 print("pressed");
               },
-              child: CommonButton(buttonName: "Login"),
+              child: CommonButton(buttonName: "Sign Up"),
             ),
             SizedBox(height: 3.h),
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SignupScreen()),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               },
               child: RichText(
                 text: TextSpan(
-                  text: 'Don\'t have an account? ',
+                  text: 'Already  have an account? ',
                   style: Theme.of(context).textTheme.titleMedium,
                   children: [
                     TextSpan(
-                      text: 'Sign Up',
+                      text: 'Login',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
