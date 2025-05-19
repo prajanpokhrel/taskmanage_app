@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, Orientation, ScreenType) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'TaskFlow ',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
