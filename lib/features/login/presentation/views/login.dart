@@ -6,6 +6,7 @@ import 'package:taskmanagement_app/common/login_logo.dart';
 import 'package:taskmanagement_app/common/pasword_form_field.dart';
 import 'package:taskmanagement_app/common/text_form.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/signup/presentation/view/signup_Screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -66,7 +67,10 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 4.h),
             GestureDetector(
               onTap: () {
-                print("pressed");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Homepage()),
+                );
               },
               child: CommonButton(buttonName: "Login"),
             ),

@@ -19,6 +19,7 @@ class _PasswordFieldState extends State<PasswordField> {
     return Padding(
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
+        textInputAction: TextInputAction.go,
         obscureText: _obscureText,
         decoration: InputDecoration(
           prefixIcon: widget.prefixIcon,
@@ -38,7 +39,7 @@ class _PasswordFieldState extends State<PasswordField> {
 
           filled: true,
           fillColor: const Color.fromARGB(255, 216, 216, 228),
-          contentPadding: EdgeInsets.all(20),
+          contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8),

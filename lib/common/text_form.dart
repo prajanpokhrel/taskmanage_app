@@ -18,12 +18,14 @@ class _TextFormState extends State<TextForm> {
     return Padding(
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
+        textInputAction: TextInputAction.next,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
           prefixIcon: widget.prefixIcon,
 
           filled: true,
           fillColor: const Color.fromARGB(255, 216, 216, 228),
-          contentPadding: EdgeInsets.all(20),
+
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8),

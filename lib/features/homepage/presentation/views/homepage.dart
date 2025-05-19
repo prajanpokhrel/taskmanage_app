@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanagement_app/constant/colors.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -6,7 +7,40 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: const Color.fromARGB(255, 235, 231, 231)),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+
+        backgroundColor: AppconstColor.PrimaryColor,
+        title: ListTile(
+          leading: CircleAvatar(),
+          title: Text(
+            "Welcome prajan,",
+            style: TextStyle(
+              color: AppconstColor.Kwhite,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          subtitle: Text(
+            "May 10",
+            style: TextStyle(
+              color: AppconstColor.Kwhite,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            color: AppconstColor.Kwhite,
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            color: AppconstColor.Kwhite,
+            onPressed: () {},
+            icon: Icon(Icons.notifications),
+          ),
+        ],
+      ),
     );
   }
 }
