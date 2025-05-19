@@ -52,6 +52,5 @@ class _PasswordFieldState extends State<PasswordField> {
         ),
       ),
     );
-    ;
   }
 }
