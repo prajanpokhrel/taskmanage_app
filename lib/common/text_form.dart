@@ -5,13 +5,8 @@ import 'package:taskmanagement_app/constant/colors.dart';
 class TextForm extends StatefulWidget {
   final Widget? prefixIcon;
   final String hintText;
-  final Widget? suffixIcon;
-  const TextForm({
-    super.key,
-    this.prefixIcon,
-    this.suffixIcon,
-    required this.hintText,
-  });
+
+  const TextForm({super.key, this.prefixIcon, required this.hintText});
 
   @override
   State<TextForm> createState() => _TextFormState();
@@ -25,7 +20,6 @@ class _TextFormState extends State<TextForm> {
       child: TextFormField(
         decoration: InputDecoration(
           prefixIcon: widget.prefixIcon,
-          suffixIcon: widget.suffixIcon,
 
           filled: true,
           fillColor: const Color.fromARGB(255, 216, 216, 228),

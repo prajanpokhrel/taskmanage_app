@@ -13,9 +13,9 @@ class PasswordField extends StatefulWidget {
 }
 
 class _PasswordFieldState extends State<PasswordField> {
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
-    bool _obscureText = true;
     return Padding(
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
@@ -23,7 +23,7 @@ class _PasswordFieldState extends State<PasswordField> {
         decoration: InputDecoration(
           prefixIcon: widget.prefixIcon,
           suffixIcon: IconButton(
-            color: AppconstColor.Kgrey,
+            color: AppconstColor.Kblack,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
