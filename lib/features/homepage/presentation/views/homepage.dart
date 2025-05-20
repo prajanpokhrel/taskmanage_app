@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/utils/progress_bar.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -40,6 +42,9 @@ class Homepage extends StatelessWidget {
             icon: Icon(Icons.notifications),
           ),
         ],
+      ),
+      body: Column(
+        children: [TaskProgressBar(totalTasks: 10, completedTasks: 2)],
       ),
     );
   }
