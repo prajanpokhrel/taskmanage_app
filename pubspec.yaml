@@ -40,6 +40,7 @@ dependencies:
   percent_indicator: ^4.2.5
   intl: ^0.20.2
   image_picker: ^1.1.2
+  fluentui_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:

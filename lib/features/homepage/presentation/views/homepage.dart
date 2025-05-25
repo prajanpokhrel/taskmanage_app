@@ -3,6 +3,7 @@ import 'package:taskmanagement_app/common/date_selector.dart';
 import 'package:taskmanagement_app/common/task_card.dart';
 
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/utils/bottombar/bottombar.dart';
 import 'package:taskmanagement_app/utils/progress_bar.dart';
 import 'package:taskmanagement_app/utils/utils.dart';
 
@@ -95,6 +96,14 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+
+        // backgroundColor: Colors.deepOrange,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
