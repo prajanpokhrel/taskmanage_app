@@ -23,7 +23,7 @@ class TaskProgressBar extends StatelessWidget {
         width: 200.0,
         animation: true,
         animationDuration: 1000,
-        lineHeight: 40.0,
+        lineHeight: 20.0,
         leading: Text("$completedTasks Done"),
         trailing: Text("${totalTasks - completedTasks} Left"),
         percent: percent.clamp(0.0, 1.0),

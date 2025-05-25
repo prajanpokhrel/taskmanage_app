@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:taskmanagement_app/common/date_selector.dart';
+
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/utils/progress_bar.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +49,13 @@ class Homepage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [TaskProgressBar(totalTasks: 10, completedTasks: 2)],
+      body: Center(
+        child: Column(
+          children: [
+            // TaskProgressBar(totalTasks: 10, completedTasks: 2),
+            DateSelector(),
+          ],
+        ),
       ),
     );
   }
