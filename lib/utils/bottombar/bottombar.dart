@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/profile/presentation/view/profile.dart';
 
@@ -11,13 +11,27 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
+  // final appScreens = [
+  //   const Homescreen(),
+  //   const OffersScreen(),
+  //   const MyloyaltyScreen(),
+  //   const ProfileScreen(),
+  // ];
+
+  // int _selectedItem = 0;
+  // // ignore: avoid_types_as_parameter_names
+  // void _ontappedItem(int index) {
+  //   setState(() {
+  //     _selectedItem = index;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       selectedLabelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
       type: BottomNavigationBarType.fixed,
-
-      backgroundColor: const Color.fromARGB(255, 73, 72, 72),
+      backgroundColor: Colors.red,
       unselectedItemColor: const Color.fromARGB(255, 177, 174, 174),
       selectedItemColor: Colors.white,
       showSelectedLabels: true,
@@ -27,11 +41,16 @@ class _BottomBarState extends State<BottomBar> {
           icon: Icon(Icons.home_sharp, size: 28),
           label: "HOME",
         ),
+        BottomNavigationBarItem(
+          activeIcon: Icon(Icons.percent),
+          icon: Icon(Icons.percent, size: 28),
+          label: "OFFERS",
+        ),
 
         BottomNavigationBarItem(
           activeIcon: Icon(Icons.person),
           icon: Icon(Icons.person, size: 28),
-          label: "Profile",
+          label: "LOGIN",
         ),
       ],
       onTap: (int index) {
@@ -43,6 +62,18 @@ class _BottomBarState extends State<BottomBar> {
             );
             break;
           case 1:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileScreen()),
+            );
+            break;
+          case 2:
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => ),
+            // );
+            break;
+          case 3:
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ProfileScreen()),
