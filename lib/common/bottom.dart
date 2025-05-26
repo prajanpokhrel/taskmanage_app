@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
+import 'package:taskmanagement_app/features/profile/presentation/view/profile.dart';
 
 class AnimatedBottomBar extends StatefulWidget {
   const AnimatedBottomBar({super.key});
@@ -15,7 +17,28 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
     setState(() {
       _selectedIndex = index;
     });
-    // Add your navigation logic here
+
+    //  Add your navigation logic here
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Homepage()),
+        );
+        break;
+      case 1:
+        // Navigator.push(context, MaterialPageRoute(builder: (_) => SearchPage()));
+        break;
+      case 2:
+        // Navigator.push(context, MaterialPageRoute(builder: (_) => CalendarPage()));
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfileScreen()),
+        );
+        break;
+    }
   }
 
   @override
@@ -33,9 +56,11 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             _buildNavItem(Icons.home, "Home", 0),
+            const SizedBox(width: 10),
             _buildNavItem(Icons.search, "Search", 1),
             const SizedBox(width: 40), // Space for FAB
             _buildNavItem(Icons.calendar_month, "Calendar", 2),
+            const SizedBox(width: 10),
             _buildNavItem(Icons.person, "Profile", 3),
           ],
         ),
