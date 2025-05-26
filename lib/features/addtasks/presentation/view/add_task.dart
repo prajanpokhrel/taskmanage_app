@@ -17,9 +17,17 @@ class AddNewTask extends StatefulWidget {
 }
 
 class _AddNewTaskState extends State<AddNewTask> {
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
   DateTime selectedDate = DateTime.now();
   Color _selectedColor = Colors.blue;
   File? file;
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +96,13 @@ class _AddNewTaskState extends State<AddNewTask> {
                 ),
               ),
               const SizedBox(height: 10),
-              Textformfields(hinttext: 'Title'),
+              Textformfields(controller: titleController, hinttext: 'Title'),
               SizedBox(height: 10),
-              Textformfields(hinttext: 'Descriptions', maxLine: 3),
+              Textformfields(
+                controller: descriptionController,
+                hinttext: 'Descriptions',
+                maxLine: 3,
+              ),
               ColorPicker(
                 pickersEnabled: const {ColorPickerType.wheel: true},
                 color: Colors.blue,
