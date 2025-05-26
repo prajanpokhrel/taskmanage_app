@@ -4,6 +4,7 @@ import 'package:taskmanagement_app/common/date_selector.dart';
 import 'package:taskmanagement_app/common/task_card.dart';
 
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/features/addtasks/presentation/view/add_task.dart';
 import 'package:taskmanagement_app/utils/bottombar/bottombar.dart';
 
 import 'package:taskmanagement_app/utils/utils.dart';
@@ -98,7 +99,12 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddNewTask()),
+          );
+        },
         child: const Icon(color: AppconstColor.Kwhite, Icons.add),
         backgroundColor: AppconstColor.PrimaryColor,
         shape: const CircleBorder(), //
