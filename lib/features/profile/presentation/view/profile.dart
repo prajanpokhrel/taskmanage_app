@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
+import 'package:taskmanagement_app/common/setting/setting.dart';
+import 'package:taskmanagement_app/common/setting/support.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -20,10 +22,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         title: Padding(
           padding: EdgeInsets.only(left: 8.h),
-          child: Text(
-            "Settings",
-            style: TextStyle(fontWeight: FontWeight.w500),
-          ),
+          child: Text("Profile", style: TextStyle(fontWeight: FontWeight.w500)),
         ),
       ),
       body: Column(
@@ -45,53 +44,34 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 2.h),
-          Container(
-            decoration: BoxDecoration(
-              color: AppconstColor.Kwhite,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            height: 25.h,
-            width: 41.h,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.dark_mode),
-                      SizedBox(width: 2.h),
-                      Text(
-                        "Dark mode",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        "Off",
-                        style: TextStyle(fontWeight: FontWeight.w400),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: SwitcherButton(
-                          onColor: Colors.black,
-                          offColor: AppconstColor.PrimaryColor,
-                          size: 40,
-                          value: true,
-                          onChange: (value) {
-                            "";
-                          },
-                        ),
-                      ),
-                      Text("On", style: TextStyle(fontWeight: FontWeight.w500)),
-                    ],
-                  ),
-                ),
-              ],
+          SizedBox(height: 4.h),
+          Padding(
+            padding: EdgeInsets.only(left: 3.h),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Settings",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
             ),
           ),
+          SizedBox(height: 1.h),
+
+          SettingDetails(),
+          SizedBox(height: 4.h),
+          Padding(
+            padding: EdgeInsets.only(left: 3.h),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Supports",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
+            ),
+          ),
+          SizedBox(height: 1.h),
+
+          SupportSetting(),
         ],
       ),
     );
