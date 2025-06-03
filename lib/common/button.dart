@@ -8,23 +8,26 @@ class CommonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 44.h,
-      height: 14.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppconstColor.PrimaryColor,
-      ),
+    return Padding(
+      padding: EdgeInsets.only(left: 2.h, right: 2.h),
+      child: Container(
+        width: 44.h,
+        height: 14.w,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: AppconstColor.PrimaryColor,
+        ),
 
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Center(
-          child: Text(
-            buttonName,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: AppconstColor.Kwhite,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Center(
+            child: Text(
+              buttonName,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: AppconstColor.Kwhite,
+              ),
             ),
           ),
         ),
