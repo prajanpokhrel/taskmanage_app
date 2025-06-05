@@ -47,7 +47,10 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
       shape: const CircularNotchedRectangle(),
       notchMargin: 8.0,
       elevation: 10.0,
-      color: Colors.white,
+      color:
+          Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : Theme.of(context).scaffoldBackgroundColor,
       clipBehavior: Clip.antiAlias,
       child: Container(
         height: 65,
