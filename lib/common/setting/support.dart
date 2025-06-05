@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class SupportSetting extends StatelessWidget {
   const SupportSetting({super.key});
@@ -10,7 +11,10 @@ class SupportSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppconstColor.Kwhite,
+        color:
+            Theme.of(context).brightness == Brightness.light
+                ? AppconstColor.Kwhite
+                : Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(12),
       ),
       height: 15.h,
@@ -37,7 +41,10 @@ class SupportSetting extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                print("clicked");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
               },
               child: Row(
                 children: [

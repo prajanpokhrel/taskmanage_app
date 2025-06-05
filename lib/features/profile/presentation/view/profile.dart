@@ -11,9 +11,16 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 238, 235, 235),
+      backgroundColor:
+          Theme.of(context).brightness == Brightness.light
+              ? Color.fromARGB(255, 238, 235, 235)
+              : Theme.of(context).scaffoldBackgroundColor,
+
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 238, 235, 235),
+        backgroundColor:
+            Theme.of(context).brightness == Brightness.light
+                ? Color.fromARGB(255, 238, 235, 235)
+                : Theme.of(context).scaffoldBackgroundColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
