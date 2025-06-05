@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/bottom.dart';
 import 'package:taskmanagement_app/common/date_selector.dart';
 import 'package:taskmanagement_app/common/task_card.dart';
@@ -46,10 +47,13 @@ class _HomepageState extends State<Homepage> {
             onPressed: () {},
             icon: Icon(Icons.search),
           ),
-          IconButton(
-            color: AppconstColor.Kwhite,
-            onPressed: () {},
-            icon: Icon(Icons.notifications),
+          Padding(
+            padding: EdgeInsets.only(right: 1.h),
+            child: IconButton(
+              color: AppconstColor.Kwhite,
+              onPressed: () {},
+              icon: Icon(Icons.notifications),
+            ),
           ),
         ],
       ),

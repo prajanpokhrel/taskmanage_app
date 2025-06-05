@@ -44,7 +44,7 @@ class SettingDetails extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: SwitcherButton(
-                        onColor: Colors.black,
+                        onColor: AppconstColor.Kgrey,
                         offColor: AppconstColor.PrimaryColor,
                         size: 40,
                         value: themeProvider.thememode == ThemeMode.dark,
@@ -75,7 +75,7 @@ class SettingDetails extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SwitcherButton(
-                    onColor: Colors.grey,
+                    onColor: AppconstColor.Kgrey,
                     offColor: AppconstColor.PrimaryColor,
                     size: 40,
                     value: true,
@@ -104,7 +104,7 @@ class SettingDetails extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SwitcherButton(
-                    onColor: Colors.grey,
+                    onColor: AppconstColor.Kgrey,
                     offColor: AppconstColor.PrimaryColor,
                     size: 40,
                     value: true,

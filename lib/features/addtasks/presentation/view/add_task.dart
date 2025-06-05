@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/button.dart';
 import 'package:taskmanagement_app/common/textform/textform_field.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
@@ -54,7 +55,7 @@ class _AddNewTaskState extends State<AddNewTask> {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(right: 2.h),
               child: Text(
                 DateFormat('MM-d-y').format(selectedDate),
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -76,6 +77,10 @@ class _AddNewTaskState extends State<AddNewTask> {
                   });
                 },
                 child: DottedBorder(
+                  color:
+                      Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : AppconstColor.Kwhite,
                   borderType: BorderType.RRect,
                   radius: const Radius.circular(10),
                   dashPattern: const [10, 4],
@@ -95,9 +100,9 @@ class _AddNewTaskState extends State<AddNewTask> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 3.h),
               Textformfields(controller: titleController, hinttext: 'Title'),
-              SizedBox(height: 10),
+              SizedBox(height: 3.h),
               Textformfields(
                 controller: descriptionController,
                 hinttext: 'Descriptions',
