@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import 'package:taskmanagement_app/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final prefs = await SharedPreferences.getInstance();
@@ -18,7 +20,12 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(initialTheme),
-      child: const MyApp(),
+      child: EasyLocalization(
+        supportedLocales: [Locale('en', 'US'), Locale('ne', 'NP')],
+        path: 'assets/translations',
+        fallbackLocale: Locale('en', 'US'),
+        child: const MyApp(),
+      ),
     ),
   );
 }

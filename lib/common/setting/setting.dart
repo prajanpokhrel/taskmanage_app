@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -5,12 +6,18 @@ import 'package:switcher_button/switcher_button.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/core/provider/darkmode_provider/dark_mode_provider.dart';
 
-class SettingDetails extends StatelessWidget {
+class SettingDetails extends StatefulWidget {
   final Color? switchColor;
   const SettingDetails({super.key, this.switchColor});
 
   @override
+  State<SettingDetails> createState() => _SettingDetailsState();
+}
+
+class _SettingDetailsState extends State<SettingDetails> {
+  @override
   Widget build(BuildContext context) {
+    final isNepali = context.locale.languageCode == 'ne';
     return Container(
       decoration: BoxDecoration(
         color:
@@ -33,14 +40,17 @@ class SettingDetails extends StatelessWidget {
                     Icon(Icons.dark_mode),
                     SizedBox(width: 2.h),
                     Text(
-                      "Dark mode",
+                      "Dark mode".tr(),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Spacer(),
-                    Text("Off", style: TextStyle(fontWeight: FontWeight.w400)),
+                    Text(
+                      "Off".tr(),
+                      style: TextStyle(fontWeight: FontWeight.w400),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: SwitcherButton(
@@ -53,7 +63,10 @@ class SettingDetails extends StatelessWidget {
                         },
                       ),
                     ),
-                    Text("On", style: TextStyle(fontWeight: FontWeight.w500)),
+                    Text(
+                      "On".tr(),
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ],
                 );
               },
@@ -67,11 +80,11 @@ class SettingDetails extends StatelessWidget {
                 Icon(Icons.notifications),
                 SizedBox(width: 2.h),
                 Text(
-                  "Notification",
+                  "Notification".tr(),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Spacer(),
-                Text("Off", style: TextStyle(fontWeight: FontWeight.w400)),
+                Text("Off".tr(), style: TextStyle(fontWeight: FontWeight.w400)),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SwitcherButton(
@@ -84,7 +97,7 @@ class SettingDetails extends StatelessWidget {
                     },
                   ),
                 ),
-                Text("On", style: TextStyle(fontWeight: FontWeight.w500)),
+                Text("On".tr(), style: TextStyle(fontWeight: FontWeight.w500)),
               ],
             ),
           ),
@@ -96,7 +109,7 @@ class SettingDetails extends StatelessWidget {
                 Icon(Icons.language_rounded),
                 SizedBox(width: 2.h),
                 Text(
-                  "Select Language",
+                  "Select Language".tr(),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Spacer(),
@@ -107,9 +120,11 @@ class SettingDetails extends StatelessWidget {
                     onColor: AppconstColor.Kgrey,
                     offColor: AppconstColor.PrimaryColor,
                     size: 40,
-                    value: true,
+                    value: isNepali,
                     onChange: (value) {
-                      "";
+                      final newLocale =
+                          value ? Locale('ne', 'NP') : Locale('en', 'US');
+                      EasyLocalization.of(context)?.setLocale(newLocale);
                     },
                   ),
                 ),

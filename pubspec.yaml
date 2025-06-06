@@ -38,7 +38,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.3
   responsive_sizer: ^3.3.1
   percent_indicator: ^4.2.5
-  intl: ^0.20.2
+  intl: ^0.19.0
   image_picker: ^1.1.2
   fluentui_icons: ^1.0.0
   animated_notch_bottom_bar: ^1.0.3
@@ -51,6 +51,7 @@ dependencies:
   switcher_button: ^0.0.4
   provider: ^6.1.5
   shared_preferences: ^2.5.3
+  easy_localization: ^3.0.7+1
   
 
 dev_dependencies:
@@ -97,6 +98,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/translations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

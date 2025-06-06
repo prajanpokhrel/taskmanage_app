@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -28,8 +29,10 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
           title: 'TaskFlow',
+          locale: context.locale,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
           theme: ThemeData.light(),
           darkTheme: darkTheme,
           themeMode: context.watch<ThemeProvider>().thememode,
