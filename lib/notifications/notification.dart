@@ -32,12 +32,13 @@ class NotifiServices {
   NotificationDetails notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        "Daily_notification",
+        "Daily_notifications",
         "Daily Notification",
         channelDescription: "Daily notification channel",
         importance: Importance.max,
         priority: Priority.high,
         playSound: true,
+        sound: RawResourceAndroidNotificationSound('notification'),
         enableVibration: true,
       ),
     );

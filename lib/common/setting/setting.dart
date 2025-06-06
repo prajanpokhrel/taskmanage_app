@@ -16,6 +16,7 @@ class SettingDetails extends StatefulWidget {
 }
 
 class _SettingDetailsState extends State<SettingDetails> {
+  bool isNotificationOn = false;
   @override
   Widget build(BuildContext context) {
     final isNepali = context.locale.languageCode == 'ne';
@@ -92,8 +93,11 @@ class _SettingDetailsState extends State<SettingDetails> {
                     onColor: AppconstColor.Kgrey,
                     offColor: AppconstColor.PrimaryColor,
                     size: 40,
-                    value: true,
+                    value: isNotificationOn,
                     onChange: (value) {
+                      setState(() {
+                        isNotificationOn = value;
+                      });
                       // instant notification code
                       if (value) {
                         // Send instant notification only when switched ON
