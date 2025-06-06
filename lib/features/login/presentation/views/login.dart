@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 4.h),
             TextForm(hintText: 'Email'.tr()),
             SizedBox(height: 4.h),
-            PasswordField(hintText: 'Password'),
+            PasswordField(hintText: 'Password'.tr()),
             SizedBox(height: 2.h),
             Container(
               margin: EdgeInsets.only(left: 24.h),
@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   MaterialPageRoute(builder: (context) => Homepage()),
                 );
               },
-              child: CommonButton(buttonName: "Login"),
+              child: CommonButton(buttonName: "Login".tr()),
             ),
             SizedBox(height: 3.h),
             GestureDetector(
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: Theme.of(context).textTheme.titleMedium,
                   children: [
                     TextSpan(
-                      text: 'Sign Up',
+                      text: 'Sign Up'.tr(),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

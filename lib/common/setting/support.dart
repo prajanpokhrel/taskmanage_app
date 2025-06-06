@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
@@ -29,7 +30,7 @@ class SupportSetting extends StatelessWidget {
                 Icon(Icons.help),
                 SizedBox(width: 2.h),
                 Text(
-                  "Help",
+                  "Help".tr(),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Spacer(),
@@ -51,7 +52,7 @@ class SupportSetting extends StatelessWidget {
                   Icon(Icons.logout_rounded),
                   SizedBox(width: 2.h),
                   Text(
-                    "Logout",
+                    "Logout".tr(),
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ],
