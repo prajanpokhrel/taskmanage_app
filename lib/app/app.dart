@@ -27,22 +27,13 @@ class MyApp extends StatelessWidget {
     );
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => ThemeProvider()),
-          ],
-          child: Consumer<ThemeProvider>(
-            builder: (context, themeProvider, child) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: 'TaskFlow',
-                theme: ThemeData.light(),
-                darkTheme: darkTheme,
-                themeMode: themeProvider.thememode,
-                home: const LoginScreen(),
-              );
-            },
-          ),
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'TaskFlow',
+          theme: ThemeData.light(),
+          darkTheme: darkTheme,
+          themeMode: context.watch<ThemeProvider>().thememode,
+          home: const LoginScreen(),
         );
       },
     );

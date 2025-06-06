@@ -20,7 +20,7 @@ class _LoginLogoState extends State<LoginLogo> {
           GestureDetector(
             child: Image.asset("assets/images/face.png", height: 30, width: 30),
           ),
-          SizedBox(width: 2.h),
+          SizedBox(width: 6.h),
           GestureDetector(
             onTap: () async {
               try {
@@ -36,8 +36,6 @@ class _LoginLogoState extends State<LoginLogo> {
               width: 30,
             ),
           ),
-          SizedBox(width: 2.h),
-          Image.asset("assets/images/apple.png", height: 30, width: 30),
         ],
       ),
     );
