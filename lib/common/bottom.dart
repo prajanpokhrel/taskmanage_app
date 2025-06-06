@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
@@ -58,13 +59,13 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            _buildNavItem(Icons.home, "Home", 0),
+            _buildNavItem(Icons.home, "Home".tr(), 0),
             const SizedBox(width: 10),
-            _buildNavItem(Icons.search, "Search", 1),
+            _buildNavItem(Icons.search, "Search".tr(), 1),
             const SizedBox(width: 40), // Space for FAB
-            _buildNavItem(Icons.calendar_month, "Calendar", 2),
+            _buildNavItem(Icons.calendar_month, "Calendar".tr(), 2),
             const SizedBox(width: 10),
-            _buildNavItem(Icons.person, "Profile", 3),
+            _buildNavItem(Icons.person, "Profile".tr(), 3),
           ],
         ),
       ),

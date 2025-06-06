@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,7 @@ class _AddNewTaskState extends State<AddNewTask> {
         foregroundColor: AppconstColor.Kwhite,
         backgroundColor: AppconstColor.PrimaryColor,
         title: Text(
-          "Add New Task",
+          "Add New Task".tr(),
           style: TextStyle(color: AppconstColor.Kwhite),
         ),
         actions: [
@@ -101,11 +102,14 @@ class _AddNewTaskState extends State<AddNewTask> {
                 ),
               ),
               SizedBox(height: 3.h),
-              Textformfields(controller: titleController, hinttext: 'Title'),
+              Textformfields(
+                controller: titleController,
+                hinttext: 'Title'.tr(),
+              ),
               SizedBox(height: 3.h),
               Textformfields(
                 controller: descriptionController,
-                hinttext: 'Descriptions',
+                hinttext: 'Descriptions'.tr(),
                 maxLine: 3,
               ),
               ColorPicker(
@@ -116,15 +120,15 @@ class _AddNewTaskState extends State<AddNewTask> {
                     _selectedColor = color;
                   });
                 },
-                heading: const Text('Select color'),
-                subheading: const Text('Select a different shade'),
+                heading: Text('Select color'.tr()),
+                subheading: Text('Select a different shade'.tr()),
               ),
               SizedBox(height: 5),
               GestureDetector(
                 onTap: () {
                   print("clicked");
                 },
-                child: CommonButton(buttonName: 'Submit'),
+                child: CommonButton(buttonName: 'Submit'.tr()),
               ),
             ],
           ),

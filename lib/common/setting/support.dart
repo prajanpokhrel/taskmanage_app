@@ -18,13 +18,13 @@ class SupportSetting extends StatelessWidget {
                 : Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(12),
       ),
-      height: 15.h,
+      height: 12.h,
       width: 41.h,
       child: Column(
         children: [
           //darkmode
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
                 Icon(Icons.help),

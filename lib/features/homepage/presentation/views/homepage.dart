@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/bottom.dart';
@@ -27,7 +28,7 @@ class _HomepageState extends State<Homepage> {
         title: ListTile(
           leading: CircleAvatar(),
           title: Text(
-            "Welcome prajan,",
+            "Welcome".tr(),
             style: TextStyle(
               color: AppconstColor.Kwhite,
               fontWeight: FontWeight.w500,
