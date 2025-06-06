@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20.h),
             Center(
               child: Text(
-                "Login here",
+                "Login here".tr(),
                 style: TextStyle(
                   color: AppconstColor.PrimaryColor,
                   fontSize: 18,
@@ -41,12 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 2.h),
             Text(
-              "Welcome back you have",
+              "Welcome back you have".tr(),
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             Text(
-              "been missed !",
+              "been missed !".tr(),
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               margin: EdgeInsets.only(left: 24.h),
               child: Text(
-                "Forgot your Password ?",
+                "Forgot your Password?".tr(),
                 style: TextStyle(
                   color: AppconstColor.PrimaryColor,
                   fontWeight: FontWeight.w500,
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: RichText(
                 text: TextSpan(
-                  text: 'Don\'t have an account? ',
+                  text: 'Don\'t have an account?'.tr(),
                   style: Theme.of(context).textTheme.titleMedium,
                   children: [
                     TextSpan(
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Or Continue with ",
+              "Or Continue with".tr(),
               style: TextStyle(
                 color: AppconstColor.PrimaryColor,
                 fontWeight: FontWeight.w600,

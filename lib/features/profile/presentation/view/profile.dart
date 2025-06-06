@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
@@ -29,7 +30,10 @@ class ProfileScreen extends StatelessWidget {
         ),
         title: Padding(
           padding: EdgeInsets.only(left: 8.h),
-          child: Text("Profile", style: TextStyle(fontWeight: FontWeight.w500)),
+          child: Text(
+            "Profile".tr(),
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
         ),
       ),
       body: Column(
@@ -57,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Settings",
+                "Settings".tr(),
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
               ),
             ),
@@ -71,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Supports",
+                "Supports".tr(),
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
               ),
             ),

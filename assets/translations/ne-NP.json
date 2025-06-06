@@ -12,5 +12,14 @@
   "On": "चालु",
   "Off": "बन्द",
   "Help": "मद्दत",
-  "Logout": "लगआउट"
+  "Logout": "लगआउट",
+  "Forgot your Password?": "तपाईंले पासवर्ड बिर्सनुभयो?",
+  "Don't have an account?": "खाता छैन?",
+  "Or Continue with": "वा यससँग जारी राख्नुहोस्",
+  "Welcome back you have": "फेरि स्वागत छ तपाईंलाई",
+  "been missed !": "मिस गरिएको थियो!",
+  "Login here": "यहाँ लगइन गर्नुहोस्",
+  "Profile": "प्रोफाइल",
+  "Settings": "सेटिङ",
+  "Supports": "सहयोग"
 }
