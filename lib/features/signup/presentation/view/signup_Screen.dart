@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -29,7 +30,7 @@ class _SignupScreenState extends State<SignupScreen> {
             SizedBox(height: 20.h),
             Center(
               child: Text(
-                "Create An Account",
+                "Create An Account".tr(),
                 style: TextStyle(
                   color: AppconstColor.PrimaryColor,
                   fontSize: 18,
@@ -39,24 +40,24 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 2.h),
             Text(
-              "Create an account so you can ",
+              "Create an account so you can".tr(),
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             Text(
-              "manage your tasks.",
+              "manage your tasks.".tr(),
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 4.h),
-            TextForm(hintText: 'Email'),
+            TextForm(hintText: 'Email'.tr()),
             SizedBox(height: 4.h),
-            PasswordField(hintText: 'Password'),
+            PasswordField(hintText: 'Password'.tr()),
             SizedBox(height: 2.h),
             Container(
               margin: EdgeInsets.only(left: 24.h),
               child: Text(
-                "Forgot your Password ?",
+                "Forgot your Password?".tr(),
                 style: TextStyle(
                   color: AppconstColor.PrimaryColor,
                   fontWeight: FontWeight.w500,
@@ -68,7 +69,7 @@ class _SignupScreenState extends State<SignupScreen> {
               onTap: () {
                 print("pressed");
               },
-              child: CommonButton(buttonName: "Sign Up"),
+              child: CommonButton(buttonName: "Sign Up".tr()),
             ),
             SizedBox(height: 3.h),
             GestureDetector(
@@ -80,11 +81,11 @@ class _SignupScreenState extends State<SignupScreen> {
               },
               child: RichText(
                 text: TextSpan(
-                  text: 'Already  have an account? ',
+                  text: "Already have an account?".tr(),
                   style: Theme.of(context).textTheme.titleMedium,
                   children: [
                     TextSpan(
-                      text: 'Login',
+                      text: 'Login'.tr(),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -95,7 +96,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Or Continue with ",
+              "Or Continue with".tr(),
               style: TextStyle(
                 color: AppconstColor.PrimaryColor,
                 fontWeight: FontWeight.w600,
