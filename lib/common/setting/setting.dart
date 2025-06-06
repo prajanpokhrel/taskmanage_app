@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/core/provider/darkmode_provider/dark_mode_provider.dart';
+import 'package:taskmanagement_app/notifications/notification.dart';
 
 class SettingDetails extends StatefulWidget {
   final Color? switchColor;
@@ -93,7 +94,21 @@ class _SettingDetailsState extends State<SettingDetails> {
                     size: 40,
                     value: true,
                     onChange: (value) {
-                      "";
+                      // instant notification code
+                      if (value) {
+                        // Send instant notification only when switched ON
+                        NotifiServices().showNotification(
+                          title: "Log out",
+                          body: "You are logged out",
+                        );
+                      }
+                      //schedule notification code
+                      // NotifiServices().scheduleNotifications(
+                      //   title: "Log out",
+                      //   body: "you are logout",
+                      //   hour: 22,
+                      //   min: 00,
+                      // );
                     },
                   ),
                 ),

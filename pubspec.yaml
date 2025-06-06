@@ -52,6 +52,9 @@ dependencies:
   provider: ^6.1.5
   shared_preferences: ^2.5.3
   easy_localization: ^3.0.7+1
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.9.4
+  flutter_timezone: ^4.1.0
   
 
 dev_dependencies:
