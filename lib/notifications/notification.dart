@@ -32,7 +32,7 @@ class NotifiServices {
   NotificationDetails notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        "Daily_notifications",
+        "daily_notification_v2",
         "Daily Notification",
         channelDescription: "Daily notification channel",
         importance: Importance.max,
