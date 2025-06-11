@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/button.dart';
 import 'package:taskmanagement_app/common/login_logo.dart';
@@ -21,7 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final authService = AuthService();
+
   @override
   void dispose() {
     emailController.dispose();
@@ -84,6 +85,10 @@ class _SignupScreenState extends State<SignupScreen> {
               onTap: () async {
                 final email = emailController.text.trim();
                 final password = passwordController.text.trim();
+                final authService = Provider.of<AuthService>(
+                  context,
+                  listen: false,
+                );
                 try {
                   final userCredential = await authService
                       .createUserwithEmailandPassword(
