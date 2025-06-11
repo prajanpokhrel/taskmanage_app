@@ -97,6 +97,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         email: email,
                         password: password,
                       );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(seconds: 2),
+                      backgroundColor: Colors.green,
+                      content: Text("You are logged in"),
+                    ),
+                  );
 
                   if (userCredential != null) {
                     Navigator.pushReplacement(

@@ -95,6 +95,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         email: email,
                         password: password,
                       );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(seconds: 2),
+                      backgroundColor: Colors.green,
+                      content: Text("Account Created Successfully 😊"),
+                    ),
+                  );
                   if (userCredential != null) {
                     Navigator.pushReplacement(
                       context,
