@@ -5,8 +5,14 @@ import 'package:taskmanagement_app/constant/colors.dart';
 class PasswordField extends StatefulWidget {
   final Widget? prefixIcon;
   final String hintText;
+  final controller;
 
-  const PasswordField({super.key, this.prefixIcon, required this.hintText});
+  const PasswordField({
+    super.key,
+    this.prefixIcon,
+    required this.hintText,
+    this.controller,
+  });
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -19,6 +25,7 @@ class _PasswordFieldState extends State<PasswordField> {
     return Padding(
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
+        controller: widget.controller,
         textInputAction: TextInputAction.go,
         obscureText: _obscureText,
         decoration: InputDecoration(

@@ -5,8 +5,14 @@ import 'package:taskmanagement_app/constant/colors.dart';
 class TextForm extends StatefulWidget {
   final Widget? prefixIcon;
   final String hintText;
+  final controller;
 
-  const TextForm({super.key, this.prefixIcon, required this.hintText});
+  const TextForm({
+    super.key,
+    this.prefixIcon,
+    required this.hintText,
+    this.controller,
+  });
 
   @override
   State<TextForm> createState() => _TextFormState();
@@ -18,6 +24,7 @@ class _TextFormState extends State<TextForm> {
     return Padding(
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
+        controller: widget.controller,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),

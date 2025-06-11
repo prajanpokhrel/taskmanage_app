@@ -7,6 +7,7 @@ import 'package:taskmanagement_app/common/login_logo.dart';
 import 'package:taskmanagement_app/common/pasword_form_field.dart';
 import 'package:taskmanagement_app/common/text_form.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -17,6 +18,17 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final authService = AuthService();
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //for status bar
@@ -50,9 +62,12 @@ class _SignupScreenState extends State<SignupScreen> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 4.h),
-            TextForm(hintText: 'Email'.tr()),
+            TextForm(controller: emailController, hintText: 'Email'.tr()),
             SizedBox(height: 4.h),
-            PasswordField(hintText: 'Password'.tr()),
+            PasswordField(
+              controller: passwordController,
+              hintText: 'Password'.tr(),
+            ),
             SizedBox(height: 2.h),
             Container(
               margin: EdgeInsets.only(left: 24.h),
@@ -66,8 +81,22 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             SizedBox(height: 4.h),
             GestureDetector(
-              onTap: () {
-                print("pressed");
+              onTap: () async {
+                final email = emailController.text.trim();
+                final password = passwordController.text.trim();
+                try {
+                  final userCredential = await authService
+                      .createUserwithEmailandPassword(
+                        email: email,
+                        password: password,
+                      );
+                  if (userCredential != null) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
+                    );
+                  }
+                } catch (e) {}
               },
               child: CommonButton(buttonName: "Sign Up".tr()),
             ),
