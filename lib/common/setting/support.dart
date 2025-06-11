@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
-class SupportSetting extends StatelessWidget {
+class SupportSetting extends StatefulWidget {
   const SupportSetting({super.key});
 
+  @override
+  State<SupportSetting> createState() => _SupportSettingState();
+}
+
+class _SupportSettingState extends State<SupportSetting> {
+  final authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,10 +49,7 @@ class SupportSetting extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
+                authService.signOut(context);
               },
               child: Row(
                 children: [

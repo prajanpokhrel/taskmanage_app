@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/button.dart';
 import 'package:taskmanagement_app/common/login_logo.dart';
 import 'package:taskmanagement_app/common/pasword_form_field.dart';
 import 'package:taskmanagement_app/common/text_form.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/signup/presentation/view/signup_Screen.dart';
 
@@ -18,6 +20,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //for status bar
@@ -51,9 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 4.h),
-            TextForm(hintText: 'Email'.tr()),
+            TextForm(controller: emailController, hintText: 'Email'.tr()),
             SizedBox(height: 4.h),
-            PasswordField(hintText: 'Password'.tr()),
+            PasswordField(
+              controller: passwordController,
+              hintText: 'Password'.tr(),
+            ),
             SizedBox(height: 2.h),
             Container(
               margin: EdgeInsets.only(left: 24.h),
@@ -67,11 +82,31 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 4.h),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                print("clecked");
+                final authService = Provider.of<AuthService>(
                   context,
-                  MaterialPageRoute(builder: (context) => Homepage()),
+                  listen: false,
                 );
+
+                final email = emailController.text.trim();
+                final password = passwordController.text.trim();
+                try {
+                  final userCredential = await authService
+                      .loginwithEmailandPassword(
+                        email: email,
+                        password: password,
+                      );
+
+                  if (userCredential != null) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const Homepage()),
+                    );
+                  }
+                } catch (e) {
+                  print("error");
+                }
               },
               child: CommonButton(buttonName: "Login".tr()),
             ),
