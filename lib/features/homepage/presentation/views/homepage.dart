@@ -68,7 +68,13 @@ class _HomepageState extends State<Homepage> {
             // getting data from database
             StreamBuilder(
               stream:
-                  FirebaseFirestore.instance.collection('tasks').snapshots(),
+                  FirebaseFirestore.instance
+                      .collection('tasks')
+                      .where(
+                        'creator',
+                        isEqualTo: FirebaseAuth.instance.currentUser!.uid,
+                      )
+                      .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator();
