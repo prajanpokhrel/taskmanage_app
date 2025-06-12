@@ -5,10 +5,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/button.dart';
 import 'package:taskmanagement_app/common/textform/textform_field.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
 import 'package:taskmanagement_app/utils/utils.dart';
 
 class AddNewTask extends StatefulWidget {
@@ -125,8 +127,18 @@ class _AddNewTaskState extends State<AddNewTask> {
               ),
               SizedBox(height: 5),
               GestureDetector(
-                onTap: () {
-                  print("clicked");
+                onTap: () async {
+                  final authService = Provider.of<AuthService>(
+                    context,
+                    listen: false,
+                  );
+                  await authService.uploadinDb(
+                    context,
+                    title: titleController.text.trim(),
+                    description: descriptionController.text.trim(),
+                    date: selectedDate,
+                    color: rgbToHex(_selectedColor),
+                  );
                 },
                 child: CommonButton(buttonName: 'Submit'.tr()),
               ),

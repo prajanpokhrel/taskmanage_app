@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -67,5 +68,31 @@ class AuthService extends ChangeNotifier {
       context,
       MaterialPageRoute(builder: (_) => const LoginScreen()),
     );
+  }
+
+  // uploading  in database
+
+  Future<void> uploadinDb(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required DateTime date,
+    required String color,
+  }) async {
+    try {
+      final data = await FirebaseFirestore.instance.collection("tasks").add({
+        "title": title,
+        "description": description,
+        "date": Timestamp.fromDate(date),
+        "color": color,
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Task added successfully!")));
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Failed to add task")));
+    }
   }
 }
