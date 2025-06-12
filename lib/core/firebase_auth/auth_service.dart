@@ -1,7 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http_parser/http_parser.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'package:mime/mime.dart';
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class AuthService extends ChangeNotifier {
@@ -71,20 +77,33 @@ class AuthService extends ChangeNotifier {
   }
 
   // uploading  in database
-
   Future<void> uploadinDb(
     BuildContext context, {
     required String title,
     required String description,
     required DateTime date,
     required String color,
+    String? creators,
+
+    File? file,
   }) async {
     try {
+      String? imageUrl;
+      String? publicId;
+
+      if (file != null) {
+        final uploadData = await uploadToCloudinary(file!);
+        imageUrl = uploadData?['secure_url'];
+        publicId = uploadData?['public_id'];
+      }
       final data = await FirebaseFirestore.instance.collection("tasks").add({
         "title": title,
         "description": description,
         "date": Timestamp.fromDate(date),
         "color": color,
+        "imageUrl": imageUrl,
+        "imagePublicId": publicId,
+        "creator": FirebaseAuth.instance.currentUser!.uid,
       });
       ScaffoldMessenger.of(
         context,
@@ -93,6 +112,40 @@ class AuthService extends ChangeNotifier {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("Failed to add task")));
+    }
+  }
+
+  //uploadaing files in cloud
+  Future<Map<String, String>?> uploadToCloudinary(File file) async {
+    final cloudName = 'dszsek2ru';
+    final uploadPreset = 'task_flow';
+
+    final mimeType = lookupMimeType(file.path)?.split('/');
+    final uri = Uri.parse(
+      'https://api.cloudinary.com/v1_1/$cloudName/image/upload',
+    );
+
+    final request =
+        http.MultipartRequest('POST', uri)
+          ..fields['upload_preset'] = uploadPreset
+          ..fields['folder'] = 'taskflow_folder'
+          ..files.add(
+            await http.MultipartFile.fromPath(
+              'file',
+              file.path,
+              contentType: MediaType(mimeType![0], mimeType[1]),
+            ),
+          );
+
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      final res = await http.Response.fromStream(response);
+      final data = jsonDecode(res.body);
+      return {'secure_url': data['secure_url'], 'public_id': data['public_id']};
+    } else {
+      print('Cloudinary upload failed: ${response.statusCode}');
+      return null;
     }
   }
 }

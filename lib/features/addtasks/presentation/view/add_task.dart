@@ -138,6 +138,8 @@ class _AddNewTaskState extends State<AddNewTask> {
                     description: descriptionController.text.trim(),
                     date: selectedDate,
                     color: rgbToHex(_selectedColor),
+
+                    file: file,
                   );
                 },
                 child: CommonButton(buttonName: 'Submit'.tr()),

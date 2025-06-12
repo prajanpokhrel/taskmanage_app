@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/bottom.dart';
@@ -63,41 +65,86 @@ class _HomepageState extends State<Homepage> {
           children: [
             // TaskProgressBar(totalTasks: 10, completedTasks: 2),
             DateSelector(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 2,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      TaskCard(
-                        color: Colors.red,
-                        headerText: 'hello',
-                        descriptionText: 'hello i am comming',
-                        scheduledDate: '2025-5-25',
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: strengthenColor(
-                            const Color.fromRGBO(246, 222, 194, 1),
-                            0.69,
-                          ),
-                          shape: BoxShape.circle,
-                          image: DecorationImage(image: NetworkImage("")),
+            // getting data from database
+            StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection('tasks').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                }
+                if (!snapshot.hasData) {
+                  return Text("No Data Found");
+                }
+                // if there is data
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        key: ValueKey(
+                          snapshot.data!.docs[index].id,
+                        ), // it makes unique show it don't any error,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TaskCard(
+                                color: hexToColor(
+                                  snapshot.data!.docs[index].data()['color'],
+                                ),
+                                headerText:
+                                    snapshot.data!.docs[index].data()['title'],
+                                descriptionText:
+                                    snapshot.data!.docs[index]
+                                        .data()['description'],
+                                scheduledDate: DateFormat('yMMMd').format(
+                                  (snapshot.data!.docs[index].data()['date']
+                                          as Timestamp)
+                                      .toDate(),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: strengthenColor(
+                                  const Color.fromRGBO(246, 222, 194, 1),
+                                  0.69,
+                                ),
+                                shape: BoxShape.circle,
+                                image:
+                                    snapshot.data!.docs[index]
+                                                .data()['imageUrl'] ==
+                                            null
+                                        ? null
+                                        : DecorationImage(
+                                          image: NetworkImage(
+                                            snapshot.data!.docs[index]
+                                                .data()['imageUrl'],
+                                          ),
+                                        ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Text(
+                                DateFormat('h:mm a').format(
+                                  (snapshot.data!.docs[index].data()['date']
+                                          as Timestamp)
+                                      .toDate()
+                                      .toLocal(),
+                                ),
+                                style: TextStyle(fontSize: 17),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(
-                          "2025-5-25",
-                          style: TextStyle(fontSize: 17),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
