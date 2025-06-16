@@ -10,6 +10,8 @@ import 'package:taskmanagement_app/common/task_card.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/features/addtasks/presentation/view/add_task.dart';
 
+import 'package:taskmanagement_app/features/edittask_page/presentation/view/edit_task_page.dart';
+
 import 'package:taskmanagement_app/utils/utils.dart';
 
 class Homepage extends StatefulWidget {
@@ -91,6 +93,72 @@ class _HomepageState extends State<Homepage> {
                         key: ValueKey(
                           snapshot.data!.docs[index].id,
                         ), // it makes unique show it don't any error,
+                        onDismissed: (direction) async {
+                          if (direction == DismissDirection.endToStart) {
+                            //deleting form cloudniar
+                            // final doc = snapshot.data!.docs[index];
+                            // final publicId =
+                            //     doc.data().containsKey('imagePublicId')
+                            //         ? doc['imagePublicId']
+                            //         : null;
+
+                            // deleting from firebase
+                            await FirebaseFirestore.instance
+                                .collection('tasks')
+                                .doc(snapshot.data!.docs[index].id)
+                                .delete();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 2),
+                                backgroundColor: Colors.red,
+                                content: Text("Task  deleted"),
+                              ),
+                            );
+
+                            //updating task
+                          } else if (direction == DismissDirection.startToEnd) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => EditTaskPage(
+                                      taskId: snapshot.data!.docs[index].id,
+                                      title:
+                                          snapshot.data!.docs[index]['title'],
+                                      description:
+                                          snapshot
+                                              .data!
+                                              .docs[index]['description'],
+                                      date: snapshot.data!.docs[index]['date'],
+                                      color:
+                                          snapshot.data!.docs[index]['color'],
+                                      imageUrl:
+                                          snapshot
+                                              .data!
+                                              .docs[index]['imageUrl'],
+                                    ),
+                              ),
+                            );
+                          }
+                        },
+
+                        background: Container(
+                          color: Colors.blue,
+                          alignment: Alignment.centerRight,
+                          child: const Padding(
+                            padding: EdgeInsets.only(right: 20.0),
+                            child: Icon(Icons.edit, color: Colors.white),
+                          ),
+                        ),
+                        secondaryBackground: Container(
+                          color: Colors.red,
+                          alignment: Alignment.centerRight,
+                          child: const Padding(
+                            padding: EdgeInsets.only(right: 20.0),
+                            child: Icon(Icons.delete, color: Colors.white),
+                          ),
+                        ),
+
                         child: Row(
                           children: [
                             Expanded(
