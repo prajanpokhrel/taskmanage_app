@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'TaskFlow',
           locale: context.locale,
           localizationsDelegates: context.localizationDelegates,

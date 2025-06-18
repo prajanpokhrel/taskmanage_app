@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/bottom.dart';
 import 'package:taskmanagement_app/common/date_selector.dart';
 import 'package:taskmanagement_app/common/task_card.dart';
 
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/core/provider/notification/notification_provider.dart';
 import 'package:taskmanagement_app/features/addtasks/presentation/view/add_task.dart';
 
 import 'package:taskmanagement_app/features/edittask_page/presentation/view/edit_task_page.dart';
@@ -22,6 +24,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  bool hasNewNotification = true; // Set to true when new notification arrives
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,12 +90,39 @@ class _HomepageState extends State<Homepage> {
             onPressed: () {},
             icon: Icon(Icons.search),
           ),
-          Padding(
-            padding: EdgeInsets.only(right: 1.h),
-            child: IconButton(
-              color: AppconstColor.Kwhite,
-              onPressed: () {},
-              icon: Icon(Icons.notifications),
+          SizedBox(
+            width: 50, // or 48, depending on padding
+            height: 50,
+            child: Consumer<NotificationProvider>(
+              builder: (context, notifier, child) {
+                return Stack(
+                  children: [
+                    IconButton(
+                      color: AppconstColor.Kwhite,
+                      icon: const Icon(Icons.notifications),
+                      onPressed: () {
+                        Provider.of<NotificationProvider>(
+                          context,
+                          listen: false,
+                        ).clearNotification();
+                      },
+                    ),
+                    if (notifier.hasNewNotification)
+                      Positioned(
+                        right: 6,
+                        top: 6,
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
             ),
           ),
         ],

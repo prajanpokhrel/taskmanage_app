@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskmanagement_app/app/app.dart';
 import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
 import 'package:taskmanagement_app/core/provider/darkmode_provider/dark_mode_provider.dart';
+import 'package:taskmanagement_app/core/provider/notification/notification_provider.dart';
 import 'package:taskmanagement_app/firebase_options.dart';
 import 'package:taskmanagement_app/notifications/notification.dart';
 
@@ -27,6 +28,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider(initialTheme)),
         ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()),
       ],
       child: EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ne', 'NP')],

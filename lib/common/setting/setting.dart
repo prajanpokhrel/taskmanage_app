@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/core/provider/darkmode_provider/dark_mode_provider.dart';
+import 'package:taskmanagement_app/core/provider/notification/notification_provider.dart';
 import 'package:taskmanagement_app/notifications/notification.dart';
 
 class SettingDetails extends StatefulWidget {
@@ -105,14 +106,20 @@ class _SettingDetailsState extends State<SettingDetails> {
                         //   title: "Log out",
                         //   body: "You are logged out",
                         // );
+
+                        // schedule notification code
                         NotifiServices().scheduleNotifications(
                           title: "Just start",
                           body: "progress beats perfection. 🕒💪",
                           hour: 12,
-                          min: 16,
+                          min: 37,
                         );
+
+                        Provider.of<NotificationProvider>(
+                          context,
+                          listen: false,
+                        ).markAsNew();
                       }
-                      // schedule notification code
                     },
                   ),
                 ),
