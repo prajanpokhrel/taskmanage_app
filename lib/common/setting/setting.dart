@@ -101,18 +101,18 @@ class _SettingDetailsState extends State<SettingDetails> {
                       // instant notification code
                       if (value) {
                         // Send instant notification only when switched ON
-                        NotifiServices().showNotification(
-                          title: "Log out",
-                          body: "You are logged out",
+                        // NotifiServices().showNotification(
+                        //   title: "Log out",
+                        //   body: "You are logged out",
+                        // );
+                        NotifiServices().scheduleNotifications(
+                          title: "Just start",
+                          body: "progress beats perfection. 🕒💪",
+                          hour: 12,
+                          min: 16,
                         );
                       }
-                      //schedule notification code
-                      // NotifiServices().scheduleNotifications(
-                      //   title: "Log out",
-                      //   body: "you are logout",
-                      //   hour: 22,
-                      //   min: 00,
-                      // );
+                      // schedule notification code
                     },
                   ),
                 ),
