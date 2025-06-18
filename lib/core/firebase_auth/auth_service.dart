@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
+import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class AuthService extends ChangeNotifier {
@@ -108,6 +109,10 @@ class AuthService extends ChangeNotifier {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("Task added successfully!")));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const Homepage()),
+      );
     } catch (e) {
       ScaffoldMessenger.of(
         context,

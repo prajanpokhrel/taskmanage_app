@@ -116,7 +116,7 @@ class _AddNewTaskState extends State<AddNewTask> {
               ),
               ColorPicker(
                 pickersEnabled: const {ColorPickerType.wheel: true},
-                color: Colors.blue,
+
                 onColorChanged: (Color color) {
                   setState(() {
                     _selectedColor = color;
