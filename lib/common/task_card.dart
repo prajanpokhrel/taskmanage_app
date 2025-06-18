@@ -16,6 +16,7 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       padding: const EdgeInsets.symmetric(vertical: 20.0).copyWith(left: 15),
@@ -32,9 +33,10 @@ class TaskCard extends StatelessWidget {
               padding: EdgeInsets.only(right: 2.h),
               child: Text(
                 headerText,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.black : Colors.black87,
                 ),
               ),
             ),
@@ -42,12 +44,21 @@ class TaskCard extends StatelessWidget {
               padding: const EdgeInsets.only(right: 20, bottom: 25),
               child: Text(
                 descriptionText,
-                style: const TextStyle(fontSize: 14),
+                style: TextStyle(
+                  color: isDark ? Colors.black : Colors.black87,
+                  fontSize: 14,
+                ),
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Text(scheduledDate, style: const TextStyle(fontSize: 17)),
+            Text(
+              scheduledDate,
+              style: TextStyle(
+                fontSize: 17,
+                color: isDark ? Colors.black : Colors.black87,
+              ),
+            ),
           ],
         ),
       ),
