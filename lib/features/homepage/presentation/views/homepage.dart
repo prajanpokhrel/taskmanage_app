@@ -29,22 +29,56 @@ class _HomepageState extends State<Homepage> {
         automaticallyImplyLeading: false,
 
         backgroundColor: AppconstColor.PrimaryColor,
-        title: ListTile(
-          leading: CircleAvatar(),
-          title: Text(
-            "Welcome".tr(),
-            style: TextStyle(
-              color: AppconstColor.Kwhite,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          subtitle: Text(
-            "May 10",
-            style: TextStyle(
-              color: AppconstColor.Kwhite,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+        title: StreamBuilder(
+          stream:
+              FirebaseFirestore.instance
+                  .collection('profile')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }
+            if (snapshot.hasData && snapshot.data!.exists) {
+              final data = snapshot.data!.data() as Map<String, dynamic>;
+              final String? name = data['name'];
+              final String? photo = data['img'];
+              final user = FirebaseAuth.instance.currentUser;
+              final email = user?.email ?? "No Email";
+              return ListTile(
+                leading: CircleAvatar(
+                  maxRadius: 22,
+                  backgroundImage: photo != null ? NetworkImage(photo) : null,
+                  child: photo == null ? const Icon(Icons.person) : null,
+                ),
+                title: Text(
+                  name != null ? "Welcome, $name" : "Welcome, User",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+
+                  style: TextStyle(
+                    color: AppconstColor.Kwhite,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+
+                subtitle: Text(
+                  email,
+                  style: TextStyle(
+                    color: AppconstColor.Kwhite,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              );
+            }
+            return const ListTile(
+              leading: CircleAvatar(child: Icon(Icons.person)),
+              title: Text("User"),
+            );
+          },
         ),
         actions: [
           IconButton(
