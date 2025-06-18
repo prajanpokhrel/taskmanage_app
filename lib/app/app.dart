@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/core/provider/darkmode_provider/dark_mode_provider.dart';
+import 'package:taskmanagement_app/features/authpage/presentation/view/auth_page.dart';
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class MyApp extends StatelessWidget {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.light(),
           darkTheme: darkTheme,
           themeMode: context.watch<ThemeProvider>().thememode,
-          home: const LoginScreen(),
+          home: AuthGate(),
         );
       },
     );

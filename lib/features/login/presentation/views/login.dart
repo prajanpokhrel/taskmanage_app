@@ -9,6 +9,7 @@ import 'package:taskmanagement_app/common/pasword_form_field.dart';
 import 'package:taskmanagement_app/common/text_form.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
+import 'package:taskmanagement_app/features/authpage/presentation/view/auth_page.dart';
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/signup/presentation/view/signup_Screen.dart';
 
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (userCredential != null) {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => const Homepage()),
+                      MaterialPageRoute(builder: (_) => const AuthGate()),
                     );
                   }
                 } catch (e) {

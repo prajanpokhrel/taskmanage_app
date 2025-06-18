@@ -56,7 +56,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
   //uploadaing files in cloud
   Future<String> uploadImageToCloudinary(File imageFile) async {
     const cloudName = 'dszsek2ru';
-    const uploadPreset = 'flutter_tasks';
+    const uploadPreset = 'task_flow';
 
     final url = Uri.parse(
       'https://api.cloudinary.com/v1_1/$cloudName/image/upload',
@@ -65,6 +65,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
     final request =
         http.MultipartRequest('POST', url)
           ..fields['upload_preset'] = uploadPreset
+          ..fields['folder'] = 'taskflow_folder'
           ..files.add(
             await http.MultipartFile.fromPath('file', imageFile.path),
           );
