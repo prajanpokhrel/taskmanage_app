@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/common/bottom.dart';
 import 'package:taskmanagement_app/common/date_selector.dart';
+import 'package:taskmanagement_app/common/skeleton/page_skeleton.dart';
 import 'package:taskmanagement_app/common/task_card.dart';
 
 import 'package:taskmanagement_app/constant/colors.dart';
@@ -15,6 +16,7 @@ import 'package:taskmanagement_app/features/addtasks/presentation/view/add_task.
 import 'package:taskmanagement_app/features/edittask_page/presentation/view/edit_task_page.dart';
 
 import 'package:taskmanagement_app/utils/utils.dart';
+import 'package:loader_skeleton/loader_skeleton.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -91,8 +93,6 @@ class _HomepageState extends State<Homepage> {
             icon: Icon(Icons.search),
           ),
           SizedBox(
-            width: 50, // or 48, depending on padding
-            height: 50,
             child: Consumer<NotificationProvider>(
               builder: (context, notifier, child) {
                 return Stack(
@@ -144,7 +144,7 @@ class _HomepageState extends State<Homepage> {
                       .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return PageSkeleton();
                 }
                 if (!snapshot.hasData) {
                   return Text("No Data Found");

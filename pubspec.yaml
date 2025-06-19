@@ -60,6 +60,7 @@ dependencies:
   path: ^1.8.3
   cloud_firestore: ^5.6.9
   http_parser: ^4.0.0
+  loader_skeleton: ^0.0.4
   
 
 dev_dependencies:

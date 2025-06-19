@@ -7,6 +7,7 @@ class NotificationProvider extends ChangeNotifier {
 
   void markAsNew() {
     _hasNewNotification = true;
+
     notifyListeners();
   }
 
