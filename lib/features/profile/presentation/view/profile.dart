@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:switcher_button/switcher_button.dart';
 import 'package:taskmanagement_app/common/setting/setting.dart';
 import 'package:taskmanagement_app/common/setting/support.dart';
+import 'package:taskmanagement_app/common/skeleton/page_skeleton.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -39,20 +42,51 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            child: Center(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: AssetImage("assets/images/google.png"),
-                  ),
-                  SizedBox(height: 1.h),
-                  Text(
-                    "Prajan Pokhrel",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  ),
-                ],
-              ),
+            child: StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance
+                      .collection('profile')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return PageSkeleton();
+                }
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                if (snapshot.hasData && snapshot.data!.exists) {
+                  final data = snapshot.data!.data() as Map<String, dynamic>;
+                  final String? name = data['name'];
+                  final String? photo = data['img'];
+
+                  return Center(
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          maxRadius: 50,
+                          backgroundImage:
+                              photo != null ? NetworkImage(photo) : null,
+                          child:
+                              photo == null ? const Icon(Icons.person) : null,
+                          // backgroundImage: AssetImage(
+                          //   "assets/images/google.png",
+                          // ),
+                        ),
+                        SizedBox(height: 1.h),
+                        Text(
+                          name != null ? name : "Welcome, User",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return Text("no");
+              },
             ),
           ),
           SizedBox(height: 4.h),
