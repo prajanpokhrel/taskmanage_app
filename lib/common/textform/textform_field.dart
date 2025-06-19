@@ -4,7 +4,7 @@ import 'package:taskmanagement_app/constant/colors.dart';
 class Textformfields extends StatelessWidget {
   final String hinttext;
   final int? maxLine;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   const Textformfields({
     super.key,
     required this.hinttext,

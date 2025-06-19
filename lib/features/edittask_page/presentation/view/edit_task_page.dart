@@ -88,7 +88,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
         foregroundColor: AppconstColor.Kwhite,
         backgroundColor: AppconstColor.PrimaryColor,
         title: Text(
-          "Add New Task".tr(),
+          "Edit Your Task".tr(),
           style: TextStyle(color: AppconstColor.Kwhite),
         ),
         actions: [

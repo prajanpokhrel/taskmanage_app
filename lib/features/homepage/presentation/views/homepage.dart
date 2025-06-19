@@ -14,6 +14,7 @@ import 'package:taskmanagement_app/core/provider/notification/notification_provi
 import 'package:taskmanagement_app/features/addtasks/presentation/view/add_task.dart';
 
 import 'package:taskmanagement_app/features/edittask_page/presentation/view/edit_task_page.dart';
+import 'package:taskmanagement_app/features/search/presentation/view/task_search.dart';
 
 import 'package:taskmanagement_app/utils/utils.dart';
 import 'package:loader_skeleton/loader_skeleton.dart';
@@ -89,7 +90,12 @@ class _HomepageState extends State<Homepage> {
         actions: [
           IconButton(
             color: AppconstColor.Kwhite,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TaskSearchScreen()),
+              );
+            },
             icon: Icon(Icons.search),
           ),
           SizedBox(

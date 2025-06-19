@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/profile/presentation/view/profile.dart';
+import 'package:taskmanagement_app/features/search/presentation/view/task_search.dart';
 
 class AnimatedBottomBar extends StatefulWidget {
   const AnimatedBottomBar({super.key});
@@ -28,7 +29,10 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar> {
         );
         break;
       case 1:
-        // Navigator.push(context, MaterialPageRoute(builder: (_) => SearchPage()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TaskSearchScreen()),
+        );
         break;
       case 2:
         // Navigator.push(context, MaterialPageRoute(builder: (_) => CalendarPage()));
