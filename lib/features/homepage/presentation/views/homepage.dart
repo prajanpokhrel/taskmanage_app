@@ -160,136 +160,145 @@ class _HomepageState extends State<Homepage> {
                     return Text("No Data Found");
                   }
                   // if there is data
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      return Dismissible(
-                        key: ValueKey(
-                          snapshot.data!.docs[index].id,
-                        ), // it makes unique show it don't any error,
-                        onDismissed: (direction) async {
-                          if (direction == DismissDirection.endToStart) {
-                            //deleting form cloudniar
-                            // final doc = snapshot.data!.docs[index];
-                            // final publicId =
-                            //     doc.data().containsKey('imagePublicId')
-                            //         ? doc['imagePublicId']
-                            //         : null;
-
-                            // deleting from firebase
-                            await FirebaseFirestore.instance
-                                .collection('tasks')
-                                .doc(snapshot.data!.docs[index].id)
-                                .delete();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 2),
-                                backgroundColor: Colors.red,
-                                content: Text("Task  deleted"),
-                              ),
-                            );
-
-                            //updating task
-                          } else if (direction == DismissDirection.startToEnd) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => EditTaskPage(
-                                      taskId: snapshot.data!.docs[index].id,
-                                      title:
-                                          snapshot.data!.docs[index]['title'],
-                                      description:
-                                          snapshot
-                                              .data!
-                                              .docs[index]['description'],
-                                      date: snapshot.data!.docs[index]['date'],
-                                      color:
-                                          snapshot.data!.docs[index]['color'],
-                                      imageUrl:
-                                          snapshot
-                                              .data!
-                                              .docs[index]['imageUrl'],
-                                    ),
-                              ),
-                            );
-                          }
-                        },
-
-                        background: Container(
-                          color: Colors.blue,
-                          alignment: Alignment.centerRight,
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: 20.0),
-                            child: Icon(Icons.edit, color: Colors.white),
-                          ),
-                        ),
-                        secondaryBackground: Container(
-                          color: Colors.red,
-                          alignment: Alignment.centerRight,
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: 20.0),
-                            child: Icon(Icons.delete, color: Colors.white),
-                          ),
-                        ),
-
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TaskCard(
-                                color: hexToColor(
-                                  snapshot.data!.docs[index].data()['color'],
-                                ),
-                                headerText:
-                                    snapshot.data!.docs[index].data()['title'],
-                                descriptionText:
-                                    snapshot.data!.docs[index]
-                                        .data()['description'],
-                                scheduledDate: DateFormat('yMMMd').format(
-                                  (snapshot.data!.docs[index].data()['date']
-                                          as Timestamp)
-                                      .toDate(),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                color: strengthenColor(
-                                  const Color.fromRGBO(246, 222, 194, 1),
-                                  0.69,
-                                ),
-                                shape: BoxShape.circle,
-                                image:
-                                    snapshot.data!.docs[index]
-                                                .data()['imageUrl'] ==
-                                            null
-                                        ? null
-                                        : DecorationImage(
-                                          image: NetworkImage(
-                                            snapshot.data!.docs[index]
-                                                .data()['imageUrl'],
-                                          ),
-                                        ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text(
-                                DateFormat('h:mm a').format(
-                                  (snapshot.data!.docs[index].data()['date']
-                                          as Timestamp)
-                                      .toDate()
-                                      .toLocal(),
-                                ),
-                                style: TextStyle(fontSize: 17),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      await Future.delayed(Duration(seconds: 1));
+                      setState(() {});
                     },
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                          key: ValueKey(
+                            snapshot.data!.docs[index].id,
+                          ), // it makes unique show it don't any error,
+                          onDismissed: (direction) async {
+                            if (direction == DismissDirection.endToStart) {
+                              //deleting form cloudniar
+                              // final doc = snapshot.data!.docs[index];
+                              // final publicId =
+                              //     doc.data().containsKey('imagePublicId')
+                              //         ? doc['imagePublicId']
+                              //         : null;
+
+                              // deleting from firebase
+                              await FirebaseFirestore.instance
+                                  .collection('tasks')
+                                  .doc(snapshot.data!.docs[index].id)
+                                  .delete();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  duration: Duration(seconds: 2),
+                                  backgroundColor: Colors.red,
+                                  content: Text("Task  deleted"),
+                                ),
+                              );
+
+                              //updating task
+                            } else if (direction ==
+                                DismissDirection.startToEnd) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => EditTaskPage(
+                                        taskId: snapshot.data!.docs[index].id,
+                                        title:
+                                            snapshot.data!.docs[index]['title'],
+                                        description:
+                                            snapshot
+                                                .data!
+                                                .docs[index]['description'],
+                                        date:
+                                            snapshot.data!.docs[index]['date'],
+                                        color:
+                                            snapshot.data!.docs[index]['color'],
+                                        imageUrl:
+                                            snapshot
+                                                .data!
+                                                .docs[index]['imageUrl'],
+                                      ),
+                                ),
+                              );
+                            }
+                          },
+
+                          background: Container(
+                            color: Colors.blue,
+                            alignment: Alignment.centerRight,
+                            child: const Padding(
+                              padding: EdgeInsets.only(right: 20.0),
+                              child: Icon(Icons.edit, color: Colors.white),
+                            ),
+                          ),
+                          secondaryBackground: Container(
+                            color: Colors.red,
+                            alignment: Alignment.centerRight,
+                            child: const Padding(
+                              padding: EdgeInsets.only(right: 20.0),
+                              child: Icon(Icons.delete, color: Colors.white),
+                            ),
+                          ),
+
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TaskCard(
+                                  color: hexToColor(
+                                    snapshot.data!.docs[index].data()['color'],
+                                  ),
+                                  headerText:
+                                      snapshot.data!.docs[index]
+                                          .data()['title'],
+                                  descriptionText:
+                                      snapshot.data!.docs[index]
+                                          .data()['description'],
+                                  scheduledDate: DateFormat('yMMMd').format(
+                                    (snapshot.data!.docs[index].data()['date']
+                                            as Timestamp)
+                                        .toDate(),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  color: strengthenColor(
+                                    const Color.fromRGBO(246, 222, 194, 1),
+                                    0.69,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  image:
+                                      snapshot.data!.docs[index]
+                                                  .data()['imageUrl'] ==
+                                              null
+                                          ? null
+                                          : DecorationImage(
+                                            image: NetworkImage(
+                                              snapshot.data!.docs[index]
+                                                  .data()['imageUrl'],
+                                            ),
+                                          ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text(
+                                  DateFormat('h:mm a').format(
+                                    (snapshot.data!.docs[index].data()['date']
+                                            as Timestamp)
+                                        .toDate()
+                                        .toLocal(),
+                                  ),
+                                  style: TextStyle(fontSize: 17),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),
