@@ -14,6 +14,7 @@ import 'package:taskmanagement_app/common/textform/textform_field.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
 
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
+import 'package:taskmanagement_app/features/profile/presentation/view/profile.dart';
 import 'package:taskmanagement_app/utils/utils.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -65,17 +66,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
           .update({'img': imageUrl, "name": nameController.text.trim()});
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Profile updated successfully!")),
+        const SnackBar(
+          backgroundColor: AppconstColor.Kgreen,
+          duration: Duration(seconds: 2),
+          content: Text("Profile updated successfully!"),
+        ),
       );
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Homepage()),
+        MaterialPageRoute(builder: (context) => const ProfileScreen()),
       );
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Failed to update profile")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 2),
+          backgroundColor: AppconstColor.Kred,
+          content: Text("Failed to update profile"),
+        ),
+      );
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:taskmanagement_app/common/bottom.dart';
 import 'package:taskmanagement_app/common/date_selector.dart';
@@ -102,15 +103,18 @@ class _HomepageState extends State<Homepage> {
               builder: (context, notifier, child) {
                 return Stack(
                   children: [
-                    IconButton(
-                      color: AppconstColor.Kwhite,
-                      icon: const Icon(Icons.notifications),
-                      onPressed: () {
-                        Provider.of<NotificationProvider>(
-                          context,
-                          listen: false,
-                        ).clearNotification();
-                      },
+                    Padding(
+                      padding: EdgeInsets.only(right: 1.h),
+                      child: IconButton(
+                        color: AppconstColor.Kwhite,
+                        icon: const Icon(Icons.notifications),
+                        onPressed: () {
+                          Provider.of<NotificationProvider>(
+                            context,
+                            listen: false,
+                          ).clearNotification();
+                        },
+                      ),
                     ),
                     if (notifier.hasNewNotification)
                       Positioned(
