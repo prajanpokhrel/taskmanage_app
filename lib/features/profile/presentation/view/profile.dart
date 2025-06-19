@@ -8,6 +8,7 @@ import 'package:taskmanagement_app/common/setting/setting.dart';
 import 'package:taskmanagement_app/common/setting/support.dart';
 import 'package:taskmanagement_app/common/skeleton/page_skeleton.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/features/profile/presentation/view/edit_profile/edit_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -78,7 +79,14 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             SizedBox(width: 1.h),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProfilePage(),
+                                  ),
+                                );
+                              },
                               child: Icon(
                                 color: AppconstColor.PrimaryColor,
                                 Icons.edit,
