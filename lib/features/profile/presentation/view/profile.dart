@@ -51,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                       .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return PageSkeleton();
+                  return Expanded(child: PageSkeleton());
                 }
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');

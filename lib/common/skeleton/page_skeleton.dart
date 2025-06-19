@@ -6,6 +6,10 @@ class PageSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CardPageSkeleton(totalLines: 5);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return isDarkMode
+        ? DarkCardListSkeleton(length: 5, isCircularImage: true)
+        : CardPageSkeleton(totalLines: 5);
   }
 }
