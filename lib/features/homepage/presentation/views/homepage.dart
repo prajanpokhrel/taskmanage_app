@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:taskmanagement_app/common/bottom.dart';
 import 'package:taskmanagement_app/common/date_selector.dart';
 import 'package:taskmanagement_app/common/skeleton/page_skeleton.dart';
@@ -17,7 +17,6 @@ import 'package:taskmanagement_app/features/edittask_page/presentation/view/edit
 import 'package:taskmanagement_app/features/search/presentation/view/task_search.dart';
 
 import 'package:taskmanagement_app/utils/utils.dart';
-import 'package:loader_skeleton/loader_skeleton.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});

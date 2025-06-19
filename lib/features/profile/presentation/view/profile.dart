@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:switcher_button/switcher_button.dart';
+
 import 'package:taskmanagement_app/common/setting/setting.dart';
 import 'package:taskmanagement_app/common/setting/support.dart';
 import 'package:taskmanagement_app/common/skeleton/page_skeleton.dart';
@@ -63,15 +63,28 @@ class ProfileScreen extends StatelessWidget {
                   return Center(
                     child: Column(
                       children: [
-                        CircleAvatar(
-                          maxRadius: 50,
-                          backgroundImage:
-                              photo != null ? NetworkImage(photo) : null,
-                          child:
-                              photo == null ? const Icon(Icons.person) : null,
-                          // backgroundImage: AssetImage(
-                          //   "assets/images/google.png",
-                          // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 50,
+                              backgroundImage:
+                                  photo != null ? NetworkImage(photo) : null,
+                              child:
+                                  photo == null
+                                      ? const Icon(Icons.person)
+                                      : null,
+                            ),
+                            SizedBox(width: 1.h),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                color: AppconstColor.PrimaryColor,
+                                Icons.edit,
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 1.h),
                         Text(
@@ -85,7 +98,10 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   );
                 }
-                return Text("no");
+                return ListTile(
+                  leading: CircleAvatar(child: Icon(Icons.person)),
+                  title: Text("User"),
+                );
               },
             ),
           ),
