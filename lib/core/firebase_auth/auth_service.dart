@@ -10,23 +10,55 @@ import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
 import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
+import 'package:taskmanagement_app/features/profile/presentation/view/profile_page.dart';
 
 class AuthService extends ChangeNotifier {
   //login in with google
 
-  Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    if (googleUser == null) throw Exception('Google Sign-In aborted');
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) throw Exception('Google Sign-In aborted');
 
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithCredential(credential);
+      String uid = userCredential.user!.uid;
+
+      //Check Firestore for profile
+      final docSnapshot =
+          await FirebaseFirestore.instance.collection('profile').doc(uid).get();
+
+      final userData = docSnapshot.data();
+
+      if (docSnapshot.exists &&
+          userData != null &&
+          userData['name'] != null &&
+          userData['name'].toString().isNotEmpty) {
+        //  Profile is complete
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => Homepage()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => ProfilePage()),
+        );
+      }
+    } catch (e) {
+      print('Google Sign-In error: $e');
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Google Sign-In Failed')));
+    }
   }
 
   // Creating user with email and password

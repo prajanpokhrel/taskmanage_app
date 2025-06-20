@@ -29,7 +29,10 @@ class _LoginLogoState extends State<LoginLogo> {
                 listen: false,
               );
               try {
-                await authService.signInWithGoogle();
+                await Provider.of<AuthService>(
+                  context,
+                  listen: false,
+                ).signInWithGoogle(context);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => Homepage()),
