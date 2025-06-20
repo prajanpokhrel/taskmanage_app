@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:taskmanagement_app/core/firebase_auth/auth_service.dart';
+import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 
 class LoginLogo extends StatefulWidget {
   const LoginLogo({super.key});
@@ -10,7 +12,6 @@ class LoginLogo extends StatefulWidget {
 }
 
 class _LoginLogoState extends State<LoginLogo> {
-  final auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,11 +24,21 @@ class _LoginLogoState extends State<LoginLogo> {
           SizedBox(width: 6.h),
           GestureDetector(
             onTap: () async {
+              final authService = Provider.of<AuthService>(
+                context,
+                listen: false,
+              );
               try {
-                await auth.signInWithGoogle();
-                // Navigate to home screen
+                await authService.signInWithGoogle();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Homepage()),
+                );
               } catch (e) {
                 print("Google Sign-In Error: $e");
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Sign in failed: ${e.toString()}')),
+                );
               }
             },
             child: Image.asset(

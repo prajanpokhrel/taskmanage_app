@@ -12,7 +12,20 @@
           "package_name": "com.example.taskmanagement_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "80912346353-op3flo6a6qrorv5khk8n2bf6o6m7j0c7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taskmanagement_app",
+            "certificate_hash": "51189b2159a1aedfb1f96ce279cae5575466b084"
+          }
+        },
+        {
+          "client_id": "80912346353-qlcvabdhg8euj0c91bp71jb8773b3n3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAW7qzFrMYj5dHF_V1WbcG2k4EAWNnRu0w"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80912346353-o9cs633v53c5s2o6aqvcf364qf5p192b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "80912346353-s9dtboe4f1o6aqcpaql1knjod9lu5nk0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taskmanagementApp"
+              }
+            }
+          ]
         }
       }
     }

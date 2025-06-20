@@ -12,7 +12,8 @@ import 'package:taskmanagement_app/features/homepage/presentation/views/homepage
 import 'package:taskmanagement_app/features/login/presentation/views/login.dart';
 
 class AuthService extends ChangeNotifier {
-  // loginwithgoogle function
+  //login in with google
+
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) throw Exception('Google Sign-In aborted');
