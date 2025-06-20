@@ -74,6 +74,8 @@ class _HomepageState extends State<Homepage> {
 
                 subtitle: Text(
                   email,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                   style: TextStyle(
                     color: AppconstColor.Kwhite,
                     fontWeight: FontWeight.w400,
