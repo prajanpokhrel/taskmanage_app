@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -26,7 +27,7 @@ class _TaskSearchScreenState extends State<TaskSearchScreen> {
       appBar: AppBar(
         foregroundColor: AppconstColor.Kwhite,
         backgroundColor: AppconstColor.PrimaryColor,
-        title: Text('Search Tasks'),
+        title: Text('Search Tasks'.tr()),
       ),
       body: Column(
         children: [
@@ -48,7 +49,7 @@ class _TaskSearchScreenState extends State<TaskSearchScreen> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                hintText: 'Search task...',
+                hintText: 'Search task...'.tr(),
                 prefixIcon: Icon(Icons.search),
               ),
               onChanged: (value) {
