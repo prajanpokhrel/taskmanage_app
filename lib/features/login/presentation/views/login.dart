@@ -25,6 +25,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: AppconstColor.PrimaryColor),
+    );
+  }
+
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
@@ -32,11 +40,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  // for status bar
   Widget build(BuildContext context) {
-    //for status bar
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: AppconstColor.PrimaryColor),
-    );
+    print('🔁 LoginScreen built');
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

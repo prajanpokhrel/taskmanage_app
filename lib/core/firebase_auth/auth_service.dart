@@ -32,27 +32,25 @@ class AuthService extends ChangeNotifier {
           .signInWithCredential(credential);
       String uid = userCredential.user!.uid;
 
-      //Check Firestore for profile
-      final docSnapshot =
-          await FirebaseFirestore.instance.collection('profile').doc(uid).get();
+      // Check Firestore for existing profile
+      final docRef = FirebaseFirestore.instance.collection('profile').doc(uid);
+      final docSnapshot = await docRef.get();
 
-      final userData = docSnapshot.data();
-
-      if (docSnapshot.exists &&
-          userData != null &&
-          userData['name'] != null &&
-          userData['name'].toString().isNotEmpty) {
-        //  Profile is complete
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => Homepage()),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => ProfilePage()),
-        );
+      if (!docSnapshot.exists) {
+        // Create a new profile document with default values
+        await docRef.set({
+          'name': userCredential.user?.displayName ?? '',
+          'email': userCredential.user?.email ?? '',
+          'isProfileComplete': false,
+          // Add any additional default fields here
+        });
       }
+
+      // Now check again (or just navigate to ProfilePage directly to complete it)
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => ProfilePage()),
+      );
     } catch (e) {
       print('Google Sign-In error: $e');
       ScaffoldMessenger.of(
