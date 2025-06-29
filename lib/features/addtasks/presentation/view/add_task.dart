@@ -24,7 +24,7 @@ class _AddNewTaskState extends State<AddNewTask> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   DateTime selectedDate = DateTime.now();
-  Color _selectedColor = Colors.blue;
+  Color _selectedColor = Colors.transparent;
   File? file;
   @override
   void dispose() {

@@ -43,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
   // for status bar
   Widget build(BuildContext context) {
     print('🔁 LoginScreen built');
-
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: AppconstColor.PrimaryColor),
+    );
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

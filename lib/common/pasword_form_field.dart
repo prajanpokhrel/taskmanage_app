@@ -26,6 +26,7 @@ class _PasswordFieldState extends State<PasswordField> {
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
         controller: widget.controller,
+
         textInputAction: TextInputAction.go,
         obscureText: _obscureText,
         decoration: InputDecoration(
