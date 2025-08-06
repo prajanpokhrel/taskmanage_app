@@ -112,7 +112,7 @@ class _SettingDetailsState extends State<SettingDetails> {
                           title: "Just start",
                           body: "progress beats perfection. 🕒💪",
                           hour: 8,
-                          min: 45,
+                          min: 23,
                         );
 
                         Provider.of<NotificationProvider>(
