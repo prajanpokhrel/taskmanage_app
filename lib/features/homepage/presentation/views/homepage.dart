@@ -27,10 +27,18 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  DateTime selectedDate = DateTime.now();
   bool hasNewNotification = true; // Set to true when new notification arrives
 
   @override
   Widget build(BuildContext context) {
+    final startOfDay = DateTime.utc(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+    );
+    final endOfDay = startOfDay.add(Duration(days: 1));
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -142,7 +150,13 @@ class _HomepageState extends State<Homepage> {
         child: Column(
           children: [
             // TaskProgressBar(totalTasks: 10, completedTasks: 2),
-            DateSelector(),
+            DateSelector(
+              selectedDate: selectedDate,
+              onDateSelected: (date) {
+                print('Date selected: $date');
+                setState(() => selectedDate = date);
+              },
+            ),
             // getting data from database
             Expanded(
               child: StreamBuilder(
@@ -154,6 +168,7 @@ class _HomepageState extends State<Homepage> {
                           isEqualTo: FirebaseAuth.instance.currentUser!.uid,
                         )
                         .snapshots(),
+
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return PageSkeleton();

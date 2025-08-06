@@ -13,7 +13,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-        isCoreLibraryDesugaringEnabled = true 
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -28,9 +28,20 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "my-key-alias"
+            keyPassword = "123456789"
+            storeFile = file("C:\\Users\\Prajan\\OneDrive\\Desktop\\taskmnagement_app\\taskmanagement_app\\my-release-key.jks")
+            storePassword = "123456789"
+        }
+    }
+
     buildTypes {
-        release {
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false  // Test with this off first
+            isShrinkResources = false
         }
     }
 }
@@ -38,8 +49,6 @@ android {
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.1.1")) // or latest
     implementation("com.google.firebase:firebase-auth")
-
-   
     implementation("com.google.android.gms:play-services-auth:20.6.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }

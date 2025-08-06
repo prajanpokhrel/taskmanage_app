@@ -111,8 +111,8 @@ class _SettingDetailsState extends State<SettingDetails> {
                         NotifiServices().scheduleNotifications(
                           title: "Just start",
                           body: "progress beats perfection. 🕒💪",
-                          hour: 1,
-                          min: 8,
+                          hour: 8,
+                          min: 45,
                         );
 
                         Provider.of<NotificationProvider>(
