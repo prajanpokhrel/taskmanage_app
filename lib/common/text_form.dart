@@ -6,12 +6,14 @@ class TextForm extends StatefulWidget {
   final Widget? prefixIcon;
   final String hintText;
   final controller;
+  final String? Function(String?)? validator;
 
   const TextForm({
     super.key,
     this.prefixIcon,
     required this.hintText,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -24,6 +26,7 @@ class _TextFormState extends State<TextForm> {
     return Padding(
       padding: EdgeInsets.only(left: 2.h, right: 2.h),
       child: TextFormField(
+        validator: widget.validator,
         controller: widget.controller,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
