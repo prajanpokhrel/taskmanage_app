@@ -91,12 +91,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: passwordController,
                 hintText: 'Password'.tr(),
 
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return "Password is required  ".tr();
-                //   }
-                //   return null;
-                // },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Password is required  ".tr();
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 2.h),
               Container(
