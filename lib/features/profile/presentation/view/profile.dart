@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:taskmanagement_app/common/setting/setting.dart';
 import 'package:taskmanagement_app/common/setting/support.dart';
 import 'package:taskmanagement_app/common/skeleton/page_skeleton.dart';
 import 'package:taskmanagement_app/constant/colors.dart';
+import 'package:taskmanagement_app/features/homepage/presentation/views/homepage.dart';
 import 'package:taskmanagement_app/features/profile/presentation/view/edit_profile/edit_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -29,7 +31,11 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (Context) => Homepage()),
+            );
           },
         ),
         title: Padding(
