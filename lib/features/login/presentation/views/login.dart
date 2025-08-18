@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Password is required";
-                  } else if (value.length >= 6) {
+                  } else if (value.length < 6) {
                     return "Please set password with at least 6 characters";
                   }
                   return null;
@@ -114,7 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 4.h),
               GestureDetector(
                 onTap: () async {
-                  var isValidate = _formKey.currentState!.validate();
+                  // First validate the form
+                  if (!_formKey.currentState!.validate()) {
+                    return; // Stop if validation fails
+                  }
 
                   final authService = Provider.of<AuthService>(
                     context,
@@ -123,28 +127,72 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   final email = emailController.text.trim();
                   final password = passwordController.text.trim();
+
                   try {
                     final userCredential = await authService
                         .loginwithEmailandPassword(
                           email: email,
                           password: password,
                         );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 2),
-                        backgroundColor: Colors.green,
-                        content: Text("You are logged in"),
-                      ),
-                    );
 
                     if (userCredential != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(seconds: 2),
+                          backgroundColor: Colors.green,
+                          content: Text("Login successful!".tr()),
+                        ),
+                      );
+
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (_) => const AuthGate()),
                       );
                     }
+                  } on FirebaseAuthException catch (e) {
+                    String errorMessage;
+
+                    switch (e.code) {
+                      case 'user-not-found':
+                        errorMessage = "No account found with this email".tr();
+                        break;
+                      case 'wrong-password':
+                        errorMessage = "Incorrect password".tr();
+                        break;
+                      case 'invalid-email':
+                        errorMessage = "Invalid email format".tr();
+                        break;
+                      case 'user-disabled':
+                        errorMessage = "This account has been disabled".tr();
+                        break;
+                      case 'too-many-requests':
+                        errorMessage =
+                            "Too many failed attempts. Try again later".tr();
+                        break;
+                      case 'network-request-failed':
+                        errorMessage =
+                            "Network error. Check your connection".tr();
+                        break;
+                      default:
+                        errorMessage = "Login failed. Please try again".tr();
+                    }
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 3),
+                        backgroundColor: Colors.red,
+                        content: Text(errorMessage),
+                      ),
+                    );
                   } catch (e) {
-                    print("error");
+                    // Handle any other unexpected errors
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 3),
+                        backgroundColor: Colors.red,
+                        content: Text("An unexpected error occurred".tr()),
+                      ),
+                    );
                   }
                 },
                 child: CommonButton(buttonName: "Login".tr()),
