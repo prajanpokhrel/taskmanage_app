@@ -128,15 +128,6 @@ class AuthService extends ChangeNotifier {
         imageUrl = uploadData?['secure_url'];
         publicId = uploadData?['public_id'];
       }
-      final data = await FirebaseFirestore.instance.collection("tasks").add({
-        "title": title,
-        "description": description,
-        "date": Timestamp.fromDate(date),
-        "color": color,
-        "imageUrl": imageUrl,
-        "imagePublicId": publicId,
-        "creator": FirebaseAuth.instance.currentUser!.uid,
-      });
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("Task added successfully!")));
